@@ -1,0 +1,1 @@
+ROBOCOPY ".\src\main\resources\static" ".\target\classes\static" /MIR /XO

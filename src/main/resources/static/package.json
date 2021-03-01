@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "angular": "^1.8.2",
+    "angular-resource": "^1.8.2",
+    "angular-route": "^1.8.2",
+    "angularjs-ui-bootstrap": "^2.5.0",
+    "bootstrap": "^3.3.6"
+  }
+}
