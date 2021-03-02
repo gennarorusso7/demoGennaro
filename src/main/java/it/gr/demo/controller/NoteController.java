@@ -1,4 +1,4 @@
-package it.gr.demo.controllers;
+package it.gr.demo.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.gr.demo.models.Note;
-import it.gr.demo.models.NoteDto;
-import it.gr.demo.services.NoteService;
+import it.gr.demo.model.Note;
+import it.gr.demo.dto.NoteDto;
+import it.gr.demo.service.NoteService;
 
 @RestController
 @RequestMapping("/demo")

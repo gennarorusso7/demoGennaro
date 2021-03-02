@@ -1,10 +1,10 @@
-package it.gr.demo.services;
+package it.gr.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.gr.demo.models.Note;
-import it.gr.demo.models.NoteRepository;
+import it.gr.demo.model.Note;
+import it.gr.demo.repository.NoteRepository;
 
 @Service
 public class NoteServiceImpl implements NoteService {

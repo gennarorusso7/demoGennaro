@@ -23,7 +23,7 @@ public class SwaggerConfig {
 	public Docket api() {
 
 		Docket apiInfo = new Docket(DocumentationType.SWAGGER_2).groupName("noteController-api-server").select()
-				.apis(RequestHandlerSelectors.basePackage("it.gr.demo.controllers")).build().apiInfo(new ApiInfoBuilder()
+				.apis(RequestHandlerSelectors.basePackage("it.gr.demo.controller")).build().apiInfo(new ApiInfoBuilder()
 						.title("Notes Api Service").description("Notes Api Service").version("1.0").build());
 
 		apiInfo.tags(

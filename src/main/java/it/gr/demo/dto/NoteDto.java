@@ -1,4 +1,4 @@
-package it.gr.demo.models;
+package it.gr.demo.dto;
 
 import java.io.Serializable;
 

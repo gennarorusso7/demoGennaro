@@ -1,6 +1,6 @@
-package it.gr.demo.services;
+package it.gr.demo.service;
 
-import it.gr.demo.models.Note;
+import it.gr.demo.model.Note;
 
 public interface NoteService {
 	public Iterable<Note> getNotes();
