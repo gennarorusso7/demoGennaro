@@ -1,12 +1,12 @@
 package it.gr.demo.controller;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.gr.demo.model.Note;
@@ -30,60 +30,63 @@ public class NoteController {
 	private ModelMapper modelMapper;
 
 	@GetMapping("/notes")
-	public ResponseEntity<Object> getNotes() {
-		return new ResponseEntity<>(noteService.getNotes(), HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	public List<NoteDto> getNotes() {
+		List<Note> notes = noteService.getNotes();
+		List<NoteDto> notesDto = new ArrayList<>();
+		for (Note note : notes) {
+			NoteDto noteDto = modelMapper.map(note, NoteDto.class);
+			notesDto.add(noteDto);
+		}
+		return notesDto;
 	}
 
 	@GetMapping("/notes/{id}")
-	public ResponseEntity<Object> getNote(@PathVariable Long id) {
-		NoteDto note = modelMapper.map(noteService.getNote(id), NoteDto.class);
-		return new ResponseEntity<>(note, HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	public NoteDto getNote(@PathVariable Long id) {
+		return modelMapper.map(noteService.getNote(id), NoteDto.class);
 	}
 
 	@PostMapping("/notes")
-	public ResponseEntity<Object> createNote(@RequestBody NoteDto newNote) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public void createNote(@RequestBody NoteDto newNote) {
 		Note note = modelMapper.map(newNote, Note.class);
 		noteService.createNote(note);
-		return new ResponseEntity<>("Note created successfully", HttpStatus.CREATED);
 	}
 
 	@PutMapping("/notes/{id}")
-	public ResponseEntity<Object> updateNote(@PathVariable Long id, @RequestBody NoteDto noteToUpdate) {
+	@ResponseStatus(HttpStatus.OK)
+	public void updateNote(@PathVariable Long id, @RequestBody NoteDto noteToUpdate) {
 		Note note = modelMapper.map(noteToUpdate, Note.class);
 		noteService.updateNote(id, note);
-		return new ResponseEntity<>("Note updated successsfully", HttpStatus.OK);
 	}
 
 	@DeleteMapping("/notes/{id}")
-	public ResponseEntity<Object> deleteNote(@PathVariable Long id) {
+	@ResponseStatus(HttpStatus.OK)
+	public void deleteNote(@PathVariable Long id) {
 		noteService.deleteNote(id);
-		return new ResponseEntity<>("Note deleted successsfully", HttpStatus.OK);
 	}
 
 	/**
-	 * RestCall from frontEnd
+	 * RestCalls from WebUI
 	 */
 
 	@GetMapping(value = "/string", produces = MediaType.APPLICATION_JSON_VALUE)
-	public NoteDto getDemoString() {
-		NoteDto nota = new NoteDto();
-		nota.setTitle("Andare a fare la spesa");
-		return nota;
+	public NoteDto getTitle() {
+		NoteDto noteDto = new NoteDto();
+		noteDto.setTitle(noteService.getNote((long) 1).getTitle()); // it's a demo...
+		return noteDto;
 	}
 
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public List<Note> getNotesTable() {                                    // Map from Note to NoteDto missing
-		return (List<Note>) noteService.getNotes();
+	@ResponseStatus(HttpStatus.OK)
+	public List<NoteDto> getNotesTable() {
+		List<Note> notes = noteService.getNotes();
+		List<NoteDto> notesDto = new ArrayList<>();
+		for (Note note : notes) {
+			NoteDto noteDto = modelMapper.map(note, NoteDto.class);
+			notesDto.add(noteDto);
+		}
+		return notesDto;
 	}
-//	@ResponseBody
-//	public List<NoteDto> getNotesTable() { 
-//		List<Note> notes = (List<Note>) noteService.getNotes(); // cast from iterable to list
-//		List<NoteDto> notesDto = new ArrayList<>();
-//		for (int i = 0; i < notes.size(); i++) {
-//			NoteDto dto = modelMapper.map(notes.get(i), NoteDto.class);
-//			notesDto.add(dto);
-//		}
-//		return notesDto;
-//	}
 }

@@ -1,5 +1,7 @@
 package it.gr.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ public class NoteServiceImpl implements NoteService {
 	private NoteRepository noteRepository;
 
 	@Override
-	public Iterable<Note> getNotes() {
+	public List <Note> getNotes() {
 		return noteRepository.findAll();
 	}
 
