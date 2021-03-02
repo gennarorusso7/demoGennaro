@@ -16,7 +16,7 @@
         };
 
         service.deleteDemo = function (id) {
-            return $http.delete('/demo' + id)
+            return $http.delete('/demo/' + id)
                 .then(function (response) {
                     return response.status;
                 });

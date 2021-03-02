@@ -1,5 +1,7 @@
 package it.gr.demo.controller;
 
+import java.util.*;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.gr.demo.model.Note;
@@ -67,4 +70,20 @@ public class NoteController {
 		nota.setTitle("Andare a fare la spesa");
 		return nota;
 	}
+
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<Note> getNotesTable() {                                    // Map from Note to NoteDto missing
+		return (List<Note>) noteService.getNotes();
+	}
+//	@ResponseBody
+//	public List<NoteDto> getNotesTable() { 
+//		List<Note> notes = (List<Note>) noteService.getNotes(); // cast from iterable to list
+//		List<NoteDto> notesDto = new ArrayList<>();
+//		for (int i = 0; i < notes.size(); i++) {
+//			NoteDto dto = modelMapper.map(notes.get(i), NoteDto.class);
+//			notesDto.add(dto);
+//		}
+//		return notesDto;
+//	}
 }
