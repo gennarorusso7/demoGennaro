@@ -10,7 +10,7 @@
         var service = this;
 
         service.getDemo = function () {
-            return $http.get('/demo/string').then(function (response) {
+            return $http.get('/api/string').then(function (response) {
                 return response.data;
             });
         };

@@ -22,7 +22,7 @@ import it.gr.demo.dto.NoteDto;
 import it.gr.demo.service.NoteService;
 
 @RestController
-@RequestMapping("/demo")
+@RequestMapping("/api")
 public class NoteController {
 	@Autowired
 	NoteService noteService;
@@ -49,16 +49,16 @@ public class NoteController {
 
 	@PostMapping("/notes")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createNote(@RequestBody NoteDto newNote) {
+	public Object createNote(@RequestBody NoteDto newNote) {
 		Note note = modelMapper.map(newNote, Note.class);
-		noteService.createNote(note);
+		return noteService.createNote(note);
 	}
 
 	@PutMapping("/notes/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void updateNote(@PathVariable Long id, @RequestBody NoteDto noteToUpdate) {
+	public Object updateNote(@PathVariable Long id, @RequestBody NoteDto noteToUpdate) {
 		Note note = modelMapper.map(noteToUpdate, Note.class);
-		noteService.updateNote(id, note);
+		return noteService.updateNote(id, note);
 	}
 
 	@DeleteMapping("/notes/{id}")
@@ -78,7 +78,7 @@ public class NoteController {
 		return noteDto;
 	}
 
-	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public List<NoteDto> getNotesTable() {
 		List<Note> notes = noteService.getNotes();
@@ -88,5 +88,12 @@ public class NoteController {
 			notesDto.add(noteDto);
 		}
 		return notesDto;
+	}
+
+	@PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.CREATED)
+	public Object createNoteTable(@RequestBody NoteDto newNote) {
+		Note note = modelMapper.map(newNote, Note.class);
+		return noteService.createNote(note);
 	}
 }

@@ -3,6 +3,7 @@
     "angular": "^1.8.2",
     "angular-resource": "^1.8.2",
     "angular-route": "^1.8.2",
+    "angular-swagger-ui": "^0.6.5",
     "angularjs-ui-bootstrap": "^2.5.0",
     "bootstrap": "^3.3.6",
     "ng-table": "^3.0.1"

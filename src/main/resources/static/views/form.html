@@ -1,0 +1,20 @@
+<form name="myForm" novalidate>
+	<div class="row">
+		<div class="form-group col-md-6 col-lg-offset-3" ng-class="{ 'has-error' : myForm.title.$invalid }">
+			<label for="title">Titolo</label>
+			<input type="text" class="form-control" id="title" name="title" placeholder="Titolo"
+				ng-model="ngTableDemoController.title" ng-maxlength="20" required>
+		</div>
+	</div>
+	<span class="error col-lg-offset-5" ng-show="myForm.title.$error.required" style="color:red;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Richiesto!</b></span><br><br>
+	<div class="row">
+		<div class="form-group col-md-6 col-lg-offset-3" ng-class="{ 'has-error' : myForm.content.$invalid }">
+			<label for="content">Contenuto</label>
+			<input type="text" class="form-control" id="content" name="content" placeholder="Contenuto"
+				ng-model="ngTableDemoController.content" ng-maxlength="20" required>
+		</div>
+	</div>
+	<span class="error col-lg-offset-5" ng-show="myForm.content.$error.required" style="color:red;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Richiesto!</b></span><br><br>
+	<button type="submit" class="btn btn-default col-lg-offset-3" ng-disabled="myForm.title.$invalid || myForm.content.$invalid"
+		ng-click="ngTableDemoController.createNote()">Crea!</button>
+</form>

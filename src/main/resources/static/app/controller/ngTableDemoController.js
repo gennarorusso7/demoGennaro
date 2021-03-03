@@ -4,9 +4,6 @@ angular.module("demoApp")
     .controller('ngTableDemoCtrl', ['$filter', 'NgTableParams', 'NgTableDemoService', function ($filter, NgTableParams, NgTableDemoService) {
         var self = this;
 
-        self.buttonMessage = "Get";
-        self.tooltip = 'Call back-end';
-
         self.getAll = function (params) {
             return NgTableDemoService.getAll().then(
                 function (response) {
@@ -19,4 +16,18 @@ angular.module("demoApp")
         self.tableParams = new NgTableParams({}, {
             getData: self.getAll
         });
+
+        self.createNote = function () {
+
+            var newNote = {
+                title: self.title,
+                content: self.content
+            };
+
+            NgTableDemoService.createNote(newNote).then(
+                function (response) {
+                    self.response = response;
+                }
+            );
+        };
     }]);

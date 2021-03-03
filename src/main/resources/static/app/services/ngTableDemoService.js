@@ -16,9 +16,16 @@ function NgTableDemoService($http) {
 	};
 
 	service.getAll = function () {
-		return $http.get('/demo/all')
+		return $http.get('/api/')
 			.then(function (response) {
 				return response.data;
+			});
+	};
+
+	service.createNote = function (requestBody) {
+		return $http.post('/api/', requestBody)
+			.then(function (response) {
+				return response.status;
 			});
 	};
 };
