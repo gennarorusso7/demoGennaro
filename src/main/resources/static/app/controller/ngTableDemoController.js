@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module("demoApp")
-    .controller('ngTableDemoCtrl', ['$filter', 'NgTableParams', 'NgTableDemoService', function ($filter, NgTableParams, NgTableDemoService) {
+    .controller('ngTableDemoCtrl', ['$uibModal', '$filter', 'NgTableParams', 'NgTableDemoService', function ($uibModal, $filter, NgTableParams, NgTableDemoService) {
         var self = this;
 
         self.getAll = function (params) {
@@ -30,4 +30,45 @@ angular.module("demoApp")
                 }
             );
         };
+
+        self.createNoteWithModal = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: "views/partials/demoModal/viewModal.html",
+                controller: "ModalDemoCtrl",
+                controllerAs: "modal",
+                size: "lg",
+                backdrop: "static",
+            });
+
+            modalInstance.result
+                .then(function (data) {
+                    self.reason = 'closed';
+                    NgTableDemoService.createNote(data).then(
+                        function (response) {
+                            self.response = response;
+                        }
+                    );
+                    window.location.reload();
+                }, function () {
+                    self.reason = 'dismissed';
+                });
+        };
     }]);
+
+angular.module("demoApp")
+    .controller("ModalDemoCtrl", ["$uibModalInstance",
+        function ($uibModalInstance) {
+            var modal = this;
+
+            modal.ok = function () {
+                var data = {
+                    title: modal.title,
+                    content: modal.content
+                };
+                $uibModalInstance.close(data);
+            };
+
+            modal.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        }]);

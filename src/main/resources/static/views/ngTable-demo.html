@@ -1,8 +1,11 @@
 <div class="row">
-    <!-- <div class="col-lg-6 col-lg-offset-3"> -->
-        <font color="red" size="4" face="verdana">
-        <h2 class="page-header" align="enter">Note presenti sul Database</h2> </font>
-         <font color="blue" size="3" face="verdana">
+    <font color="red" size="4" face="verdana">
+        <h2 class="page-header" align="enter">Note presenti sul Database
+            <button class="btn btn-primary col-lg-offset-4" ng-click="ngTableDemoController.createNoteWithModal()">Crea!
+            </button>
+        </h2>
+    </font>
+    <font color="blue" size="3" face="verdana">
         <table ng-table="ngTableDemoController.tableParams" class="table" show-filter="true">
             <tr ng-repeat="note in $data">
                 <td title="'Codice'" filter="{ id: 'number'}" sortable="'id'">
@@ -12,6 +15,6 @@
                 <td title="'Contenuto'" filter="{ contenuto: 'text'}" sortable="'content'">
                     {{note.content}}</td>
             </tr>
-        </table></font>
-    </div>
+        </table>
+    </font>
 </div>
