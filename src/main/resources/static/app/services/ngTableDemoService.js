@@ -8,12 +8,12 @@ NgTableDemoService.$inject = ['$http'];
 function NgTableDemoService($http) {
 	var service = this;
 
-	service.getPerson = function (id) {
+	/* service.getPerson = function (id) {
 		return $http.get('/demo/person', { params: { 'id': id } })
 			.then(function (response) {
 				return response.data;
 			});
-	};
+	}; */
 
 	service.getAll = function () {
 		return $http.get('/api/')
