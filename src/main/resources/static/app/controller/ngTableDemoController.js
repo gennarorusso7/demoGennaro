@@ -48,6 +48,7 @@ angular.module("demoApp")
                             self.response = response;
                         }
                     );
+                    // window.location.reload();
                     self.tableParams.reload();
                 }, function () {
                     self.reason = 'dismissed';
