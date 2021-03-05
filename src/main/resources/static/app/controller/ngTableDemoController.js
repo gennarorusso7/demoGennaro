@@ -46,7 +46,7 @@ angular.module("demoApp")
                     NgTableDemoService.createNote(data).then(
                         function (response) {
                             self.response = response;
-                             self.tableParams.reload();
+                            self.tableParams.reload();
                         }
                     );
                 }, function () {
