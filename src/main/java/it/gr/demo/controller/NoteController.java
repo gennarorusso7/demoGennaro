@@ -17,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import it.gr.demo.model.Note;
+import it.gr.demo.config.SwaggerConfig;
 import it.gr.demo.dto.NoteDto;
 import it.gr.demo.service.NoteService;
 
 @RestController
+@Api(tags = { SwaggerConfig.NOTECONTROLLER })
 @RequestMapping("/api")
 public class NoteController {
 	@Autowired
