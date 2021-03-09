@@ -1,6 +1,2 @@
-<div>
-	<form ng-submit="swaggerUrl=url" class="form-inline dispInline">
-		<button ng-hide="Explore" type="submit" class="btn btn-primary" ng-click="Explore=true">Notes Api Service</button>
-	</form>
-	<div ng-show="Explore" swagger-ui url="swaggerUrl" validator-url="false" error-handler="myErrorHandler"></div>
+<div swagger-ui url="swaggerUrl=url" api-explorer="true" validator-url="false" error-handler="myErrorHandler">
 </div>
