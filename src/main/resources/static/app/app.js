@@ -28,5 +28,8 @@ demoApp.config(function ($routeProvider) {
             templateUrl: 'views/form.html',
             controller: 'ngTableDemoCtrl',
             controllerAs: 'ngTableDemoController'
+        })
+        .otherwise({
+            redirectTo: '/'
         });
 });
