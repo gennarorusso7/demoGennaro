@@ -29,7 +29,5 @@ demoApp.config(function ($routeProvider) {
             controller: 'ngTableDemoCtrl',
             controllerAs: 'ngTableDemoController'
         })
-        .otherwise({
-            redirectTo: '/'
-        });
+        .otherwise('/');
 });
